@@ -37,7 +37,7 @@ const destroy= async (req, res)=>{
             message:"Successfully deleted a city",
             err:{}
         });   
-    }catch(error){
+    } catch(error){
         console.log(error);
         return res.status(500).json({
             data:{},
@@ -59,8 +59,7 @@ const get= async (req, res)=>{
             message:"Successfully fetched a city",
             err:{}
         });
-
-    }catch(error){
+    } catch(error){
         console.log(error);
         return res.status(500).json({
             data:{},
@@ -81,8 +80,7 @@ const update= async ( req, res)=>{
             message:"Successfully updated a city",
             err:{}
         });
-
-    }catch(error){
+    } catch(error){
         console.log(error);
         return res.status(500).json({
             data:{},
