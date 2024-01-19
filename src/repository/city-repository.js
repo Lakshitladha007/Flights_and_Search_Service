@@ -20,12 +20,25 @@ class CityRepository{
 
     async deleteCity(cityId){
         try {
-            await City.destroy({
-                where:{
+            const res=await City.findByPk(cityId);
+            if(res!=null){
+                
+             const response=await City.destroy({
+                 where:{
                     id:cityId,
                 }
-            });
-            return true;
+             });
+             return response;
+            }
+            else{
+                console.log("Something went wrong in repository layer");
+                throw {error};
+            }
+            // const response=await City.destroy({
+            //     where:{
+            //         id:cityId,
+            //     }
+            // });
         } catch (error) {
             console.log("Something went wrong in respository layer");
             throw {error};
