@@ -11,6 +11,7 @@ router.delete('/city/:id', CityController.destroy);
 
 //GET
 router.get('/city/:id', CityController.get);
+router.get('/city',CityController.getAll);
 
 //PATCH or UPDATE
 router.patch('/city/:id', CityController.update);
