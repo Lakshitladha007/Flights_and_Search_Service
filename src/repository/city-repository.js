@@ -34,24 +34,32 @@ class CityRepository{
                 console.log("Something went wrong in repository layer");
                 throw {error};
             }
-            // const response=await City.destroy({
-            //     where:{
-            //         id:cityId,
-            //     }
-            // });
         } catch (error) {
             console.log("Something went wrong in respository layer");
             throw {error};
         }
     }
 
-    async updateCity(cityId, data){  /// data is: `{name:"Delhi"}`
-        try {
-            const city=await City.update(data,{
-                where:{
-                    id:cityId,
-                }
-            });
+    async updateCity(cityId, data){           // data is: `{name:"Delhi"}`
+                                              // passing 2 parameters, 1st to identify which column needs to be updated and 2nd is
+                                              // with what data it is be updated
+        try{
+            //The below approach also works but it will not return updated object
+            // if we are using PostgreSql then returning:true can be used, else not
+
+            // const city= await City.update(data, {
+            //     where: {
+            //         id:cityId
+            //     }, 
+            //     returning: true,
+            //     plain:true
+            // });
+
+            //for getting updated data in Mysql we use this approach
+            
+            const city=await City.findByPk(cityId);
+            city.name=data.name;
+            await city.save();
             return city;
         } catch (error) {
             console.log("Something went wrong in respository layer");
