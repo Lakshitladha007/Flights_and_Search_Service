@@ -48,4 +48,8 @@ and then execute:
       Relationship : A City has many Airports but one airport belongs to a city.
       (one to many relationship)
 
+      `npx sequelize seed:generate --name add-airports`
+
+      `npx sequelize db:seed:all`
+
 ```
