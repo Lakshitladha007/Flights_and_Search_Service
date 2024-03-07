@@ -88,8 +88,7 @@ class CityRepository{
                             [Op.startsWith]:filter.name
                         }
                     }
-                });
-                console.log(cities);
+                });  
                 return cities;
             }
             else{
