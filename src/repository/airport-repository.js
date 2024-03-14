@@ -23,7 +23,7 @@ class AirportRepository{
         try {
          const res= await  Airport.destroy({
              where:{
-                Id:id
+                id:id
              }
           });
           return res;
@@ -33,9 +33,10 @@ class AirportRepository{
         }
      }
 
-     async updateAirport(data){
+     async updateAirport(id,data){
         try {
-          const airport=await Airport.findByPk(data.id);
+          const airport=await Airport.findByPk(id);
+          console.log(airport);
           airport.name=data.name;
           await airport.save(); 
           return airport;

@@ -25,9 +25,9 @@ class AirportService{
         }
     }
 
-    async updateAirport({name,id}){
+    async updateAirport(id, data){
         try {
-            const Airport = await this.airportRepository.updateAirport({name,id});
+            const Airport = await this.airportRepository.updateAirport(data,id);
             return Airport;
         } catch (error) {
             console.log("Something went wrong in Service Layer");
