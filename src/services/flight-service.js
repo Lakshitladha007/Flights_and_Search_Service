@@ -10,13 +10,15 @@ class FlightService{
 
     async createFlight(data){
           try {
-            if(!compareTime(data.arrivalTime, data.departureTime)){
-              throw {error:"Arrival Time cannot be less then departure time"};
+            if(!compareTime(data.arrivalTime, data.departureTime)){ // assuring arrival time should be greater than departure time
+              throw {error:"Arrival Time cannot be less than departure time"};
             }
             const airplane=await this.airplaneRepository.getAirplane(data.airplaneId);
+            console.log(airplane.capacity);
             const flight=await this.flightRepository.createFlight({      // 'airplane.capacity' gives us the totalSeats
               ...data, totalSeats:airplane.capacity                 // we add this 'totalSeats' propert to data object, as it was not present in it 
             });
+          
             return flight;
           } catch (error) {
             console.log("Something went wrong in service layer");
@@ -24,8 +26,14 @@ class FlightService{
           }
     }
 
-    async getFlight(){
-      //todo
+    async getAllFlightData(data){
+      try {
+        const flights= await this.flightRepository.getAllFlights(data);
+        return flights;
+      } catch (error) {
+        console.log("Something went wrong in service layer");
+        throw {error};
+      }
     }
 }
 
@@ -49,7 +57,8 @@ data={
 
 /**
  *  All the business logic should always be written inside service layer.
- * Example=> arrival time should be greater than departure time
+ * Example=> 1.arrival time should be greater than departure time
+ *           2. we can also keep a check on arrival date and departure date
  * 
  */
  
