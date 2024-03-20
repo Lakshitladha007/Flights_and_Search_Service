@@ -28,7 +28,7 @@ const getAll= async(req,res)=>{
         return res.status(200).json({
             data: response,
             success:true,
-            message:"Successfully created a flight",
+            message:"Successfully fetched the flights",
             err:{}
         })
         
