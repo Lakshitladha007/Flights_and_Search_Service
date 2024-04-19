@@ -66,7 +66,7 @@ class FlightRepository{
 
   async getFlight(flightId){  // this function is just to get the data of one single flight
     try {
-      const flight=await Flight.fingByPk(flightId);
+      const flight=await Flight.findByPk(flightId);
       return flight;
     } catch (error) {
       console.error("Error in fetching a flight:", error);
@@ -87,6 +87,17 @@ class FlightRepository{
     }
   }
 
+  async updateFlight(flightId, data){ 
+     try {
+      const flight= await Flight.findByPk(flightId);
+      flight.totalSeats= data.totalSeats; 
+      await flight.save();
+      return flight;
+     } catch (error) {
+       console.error("Error in fetching a flight:", error);
+       throw {error};
+     }
+  }
   
 }
 
